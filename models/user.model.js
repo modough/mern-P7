@@ -20,23 +20,10 @@ const userSchema = new mongoose.Schema (
             minlength: 6    
         },
 
-        picture: {
-            type: String,
-            default: "./uploads/profil/random-user.png"
-        },
-
         bio: {
             type: String,
             max: 1024
         },
-
-        /*followers: {
-            type: [String]
-        },
-
-        following: {
-            type: [String]
-        },*/
 
         likes: {
             type: [String]

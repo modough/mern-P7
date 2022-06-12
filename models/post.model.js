@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema(
     {
         posterId: {
-            type:String, 
+            type: String, 
             required: true
         },
         message: {
@@ -17,18 +17,7 @@ const postSchema = new mongoose.Schema(
             type: [String],
             required: true
         },
-        /*comments: {
-            type: [
-                {
-                    commentId: String,
-                    commenterPseudo: String,
-                    text: String,
-                    timestamp: Number
-                }
-            ],
-            required: true
-        }*/
-
+      
     },
     {
         timestamps: true,
