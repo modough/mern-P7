@@ -17,7 +17,7 @@ const postSchema = new mongoose.Schema(
             type: [String],
             required: true
         },
-        comments: {
+        /*comments: {
             type: [
                 {
                     commentId: String,
@@ -27,7 +27,7 @@ const postSchema = new mongoose.Schema(
                 }
             ],
             required: true
-        }
+        }*/
 
     },
     {
