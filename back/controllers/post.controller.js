@@ -23,6 +23,7 @@ module.exports.createPost = async (req, res) => {
     likers: []
     
   });
+  console.log(newPost);
   
 
   try {
