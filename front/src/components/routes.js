@@ -1,6 +1,7 @@
 import React from "react";
 import home from "../pages/home";
 import profil from "../pages/profil";
+import Trending from "../pages/Trending";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +17,7 @@ const routes = () => {
       <Switch>
         <Route path="/" exact component={home} />
         <Route path="/profil" exact component={profil} />
+        <Route path="/trending" exact component={Trending} />
         <Redirect to="/" />
       </Switch>
     </Router>

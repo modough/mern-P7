@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { UidContext } from "./AppContext";
 import Logout from "./Logout";
 
 const Navbar = () => {
   const uid = useContext(UidContext);
+  const userData = useSelector((state) => state.userReducer);
+
   return (
     <nav>
       <div className="nav-container">
@@ -20,7 +23,8 @@ const Navbar = () => {
             <li></li>
             <li className="welcome">
               <NavLink exact to="/">
-                Bienvenue 'valeur dynamique'
+              {/*create a pseudo from the email*/}
+                <h5>Bienvenue {userData.pseudo}</h5>
               </NavLink>
             </li>
             <Logout />

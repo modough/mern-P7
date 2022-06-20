@@ -10,7 +10,7 @@ module.exports.checkUser = (req, res, next) => {
                 res.cookie('jwt', '', {maxAge: 1});
                 next();
             }else {
-                console.log('decodedToken' + decodedToken);
+                console.log('decodedToken' +  decodedToken);
                 let user = await userModel.findById(decodedToken.id);
                 res.locals.user = user;
                 console.log(res.locals.user);

@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema(
     {
+        userPseudo: { 
+            type: String,
+            unique: true
+            
+            
+        },
+
         userId: {
             type: String, 
             required: true
@@ -15,7 +22,7 @@ const postSchema = new mongoose.Schema(
         },
         likers: {
             type: [String],
-            required: true
+            
         },
       
     },

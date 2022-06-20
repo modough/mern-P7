@@ -9,11 +9,11 @@ import rootReducer from "./reducers/index.reducer";
 
 //devtools
 import { composeWithDevTools } from "redux-devtools-extension";
-import logger from "logger";
+
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk, logger))
+  composeWithDevTools(applyMiddleware(thunk))
 );
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

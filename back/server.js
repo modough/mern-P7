@@ -1,5 +1,5 @@
 const express = require("express");
-
+const path = require("path");
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/user.routes');
 const postRoutes = require('./routes/post.routes.js');
@@ -38,7 +38,8 @@ app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 
 
-
+// multer.middleware pour les ressources d'images static
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 //server

@@ -64,6 +64,3 @@ module.exports.deleteUser = async (req, res, next) => {
     return res.json({ message: err });
   }
 };
-
-
-  
