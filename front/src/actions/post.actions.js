@@ -18,10 +18,22 @@ export const getPosts = () => {
 export const likePost = (postId, userId) => {
   return (dispatch) => {
     return axios
-      .patch(`${process.env.REACT_APP_API_URL}api/like-post/` + postId, {id: userId})
+      .patch(`${process.env.REACT_APP_API_URL}api/post/like-post/` + postId, {id: userId})
       .then((res) => {
         dispatch({ type: LIKE_POST, payload: {postId, userId}});
       })
       .catch((err) => console.log(err));
   };
-}
+};
+
+
+export const unlikePost = (postId, userId) => {
+  return (dispatch) => {
+    return axios
+      .patch(`${process.env.REACT_APP_API_URL}api/post/unlike-post/` + postId, {id: userId})
+      .then((res) => {
+        dispatch({ type: UNLIKE_POST, payload: {postId, userId}});
+      })
+      .catch((err) => console.log(err));
+  };
+};
