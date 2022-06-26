@@ -1,6 +1,6 @@
 @font-face {
   font-family: "font-1";
-  src: url(./assets/fonts/JosefinSans-ExtraLight.ttf);
+  src: url(./assets/fonts/Lato-Light.ttf);
 }
 @font-face {
   font-family: "font-2";
@@ -8,7 +8,7 @@
 }
 @font-face {
   font-family: "font-3";
-  src: url(./assets/fonts/JosefinSans-Bold.ttf);
+  src: url(./assets/fonts/Lato-Bold.ttf);
 }
 
 $font-1: "font-1", sans-serif;
@@ -31,6 +31,7 @@ $shadow: rgb(219, 218, 218);
   outline: none;
   border: none;
   text-decoration: none;
+  
 
   &::selection {
     background: $color-1;
@@ -46,7 +47,7 @@ textarea {
   border-radius: 20px;
   width: 270px;
   font-family: $font-1;
-  background: $white;
+  background: $color-2;
 }
 textarea {
   &:focus {

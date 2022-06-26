@@ -1,6 +1,6 @@
 import React from "react";
-import home from "../pages/home";
-import profil from "../pages/profil";
+import home from "../pages/Home";
+import profil from "../pages/Profil";
 import Trending from "../pages/Trending";
 import {
   BrowserRouter as Router,
