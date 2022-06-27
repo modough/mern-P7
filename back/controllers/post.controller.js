@@ -22,7 +22,7 @@ module.exports.createPost = async (req, res) => {
     userPseudo: userModel.pseudo,
     userId: req.body.userId,
     message: req.body.message,
-    picture: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    picture:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     likers: [],
   });
  

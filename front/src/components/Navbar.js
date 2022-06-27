@@ -23,7 +23,6 @@ const Navbar = () => {
             <li></li>
             <li className="welcome">
               <NavLink exact to="/">
-              {/*create a pseudo from the email*/}
                 <h5>Bienvenue {userData.pseudo}</h5>
               </NavLink>
             </li>

@@ -22,7 +22,7 @@ const NewPostForm = () => {
     if (message || postPicture){
       const data = new FormData();
       data.append('userId', userData._id);
-      data.append('message', userData.message);
+      data.append('message', message);
       if (file) data.append('file', file);
       //on envoie le post a la bd car c'est la bd qui cree l'id
       await dispatch(addPost(data));
@@ -46,7 +46,7 @@ const NewPostForm = () => {
   return (
     <div className="post-container">
       {isLoading ? (
-        <i className="fa fa-spinner fa-pulse"></i>
+        <i className="fas fa-spinner fa-pulse"></i>
       ) : (
         <Fragment>
           <div className="data"></div>

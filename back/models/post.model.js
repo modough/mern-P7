@@ -3,6 +3,7 @@ const postSchema = new mongoose.Schema(
     {
         userPseudo: { 
             type: String,
+            
             unique: true   
         },
 

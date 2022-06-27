@@ -9,12 +9,6 @@ const LeftNavbar = () => {
           <NavLink to="/" exact activeClassName="active-left-nav">
             <img src="./img/icons/home.svg" alt="Home" />
           </NavLink>
-          
-          <br />
-          <NavLink to="/trending" exact activeClassName="active-left-nav">
-            <img src="./img/icons/rocket.svg" alt="Home" />
-          </NavLink>
-         
           <br />
           <NavLink to="/profil" exact activeClassName="active-left-nav">
             <img src="./img/icons/user.svg" alt="Home" />

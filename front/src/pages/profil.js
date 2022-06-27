@@ -13,14 +13,7 @@ const Profil = () => {
     ) : (
       <div className="log-container">
       <Log signin={true} signup={false} />
-        <div className="img-container">
-          <img
-            src="./img/icon.png"
-            className="App-logo"
-            alt="logo"
-          />
-          
-        </div>
+        
       </div>
     )}
      
