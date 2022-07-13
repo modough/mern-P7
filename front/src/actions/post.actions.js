@@ -18,18 +18,15 @@ export const getPosts = () => {
   };
 };
 
-export const addPost = (data) =>{
+export const addPost = (data) => {
   return () => {
     return axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}api/post/`,
       data: data,
-    }
-
-    )
-      
+    });
   };
-}
+};
 
 export const likePost = (postId, userId) => {
   return (dispatch) => {
@@ -57,15 +54,16 @@ export const unlikePost = (postId, userId) => {
   };
 };
 
-export const updatePost = (postId, message) => {
+export const updatePost = (postId, message, picture) => {
+  
   return (dispatch) => {
     return axios({
       method: "put",
       url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
-      data: { message },
+      data: { message, picture },
     })
       .then((res) => {
-        dispatch({ type: UPDATE_POST, payload: {postId, message } });
+        dispatch({ type: UPDATE_POST, payload: { postId, message, picture } });
       })
       .catch((err) => console.log(err));
   };

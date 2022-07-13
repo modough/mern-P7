@@ -41,7 +41,8 @@ export default function postReducer(state = initialState, action) {
         if (post._id === action.payload.postId) {
           return {
             ...post,
-            message: action.payload.message
+            message: action.payload.message,
+            picture: action.payload.picture
           };
         }
         else return post;

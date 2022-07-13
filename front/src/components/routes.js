@@ -15,9 +15,9 @@ const routes = () => {
     <Router>
       <Navbar />
       <Switch>
-        <Route path="/" exact component={home} />
+        <Route path="/home" exact component={home} />
         <Route path="/profil" exact component={profil} />
-        <Redirect to="/" />
+        <Redirect to="/profil" />
       </Switch>
     </Router>
   );

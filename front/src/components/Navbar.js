@@ -9,39 +9,42 @@ const Navbar = () => {
   const userData = useSelector((state) => state.userReducer);
 
   return (
-    <nav>
-      <div className="nav-container">
-        <div className="logo">
-          <NavLink exact to="/">
+    <div>
+      {uid ? (
+        <nav>
+          <div className="nav-container">
             <div className="logo">
-              <img src="./img/icon-left-font-monochrome-black.png" alt="icon" />
-            </div>
-          </NavLink>
-        </div>
-        {uid ? (
-          <ul>
-            <li></li>
-            <li className="welcome">
               <NavLink exact to="/">
-                <h5>Bienvenue {userData.pseudo}</h5>
-              </NavLink>
-            </li>
-            <Logout />
-          </ul>
-        ) : (
-          <ul>
-            <li></li>
-            <li>
-              <NavLink exact to="/profil">
-                <div>
-                  <img src="./img/icons/login.svg" alt="login" />
+                <div className="logo">
+                  <img src="./img/icon-left-font.png" alt="icon" />
                 </div>
               </NavLink>
-            </li>
-          </ul>
-        )}
-      </div>
-    </nav>
+            </div>
+            <ul>
+              <li className="pages">
+                <NavLink exact to="/home">
+                  <p>Accueil </p>
+                </NavLink>
+                <NavLink exact to="/profil">
+                  <p>Profil</p>
+                </NavLink>
+              </li>
+              <li className="welcome">
+                <NavLink exact to="/">
+                  <h5>Bienvenue {userData.pseudo}</h5>
+                </NavLink>
+              </li>
+              <Logout />
+            </ul>
+          </div>
+        </nav>
+      ) : (
+        <ul>
+          <li></li>
+          <li></li>
+        </ul>
+      )}
+    </div>
   );
 };
 

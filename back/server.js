@@ -6,6 +6,7 @@ const postRoutes = require('./routes/post.routes.js');
 require('dotenv').config({path: './config/.env'});
 require('./config/db');
 const {checkUser, requireAuth} = require('./middlewares/auth.middleware');
+
 const cors = require('cors')
 
 const app = express();
@@ -25,6 +26,7 @@ const corsOptions = {
   'preFlightContinue': false
 }
 app.use(cors(corsOptions) );
+
 
 //jwt for secure connection
 app.get('*', checkUser);

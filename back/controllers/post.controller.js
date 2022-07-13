@@ -1,10 +1,9 @@
 const postModel = require("../models/post.model");
 const userModel = require("../models/user.model");
-const {uploadErrors} = require("../utils/error.utils");
-
-
+const { uploadErrors } = require("../utils/error.utils");
 const objectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
+
 
 module.exports.readPost = (req, res) => {
   postModel
@@ -17,36 +16,36 @@ module.exports.readPost = (req, res) => {
 };
 
 module.exports.createPost = async (req, res) => {
-  
   const newPost = new postModel({
     userPseudo: userModel.pseudo,
     userId: req.body.userId,
     message: req.body.message,
-    picture:`${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likers: [],
   });
- 
-  await newPost.save()
-    .then(() => res.status(201).json({ message: 'Enregistré !'}))
-    .catch(() => res.status(400).json({ uploadErrors }));   
-  
+
+  await newPost
+    .save()
+    .then(() => res.status(201).json({ message: "Enregistré !" }))
+    .catch(() => res.status(400).json({ uploadErrors }));
 };
 
 module.exports.updatePost = (req, res) => {
   if (!objectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown :" + req.params.id);
+    return res.status(400).send("ID unknown : " + req.params.id);
 
   const updatedRecord = {
     message: req.body.message,
-    
+    picture: req.body.picture
   };
+
   postModel.findByIdAndUpdate(
     req.params.id,
     { $set: updatedRecord },
     { new: true },
     (err, docs) => {
       if (!err) res.send(docs);
-      else console.log("Update error :" + err);
+      else console.log("Update error : " + err);
     }
   );
 };
@@ -54,10 +53,14 @@ module.exports.updatePost = (req, res) => {
 module.exports.deletePost = (req, res) => {
   if (!objectID.isValid(req.params.id))
     return res.status(400).send("ID unknown :" + req.params.id);
-  postModel.findByIdAndRemove(req.params.id, (err, docs) => {
-    if (!err) res.send(docs);
-    else console.log("Delete error :" + err);
-  });
+  postModel.findByIdAndRemove(
+    req.params.id,
+
+    (err, docs) => {
+      if (!err) res.send(docs);
+      else console.log("Delete error :" + err);
+    }
+  );
 };
 
 module.exports.likePost = async (req, res) => {

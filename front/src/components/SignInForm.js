@@ -19,7 +19,7 @@ const SignInForm = () => {
       .then((res) => {
         if (res) {
           console.log(res);
-          window.location = "/";
+          window.location = "/home";
         }
       })
       .catch((err) => {

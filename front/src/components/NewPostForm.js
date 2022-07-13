@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { addPost, getPosts } from "../actions/post.actions";
 import {timestampParser} from "./Utils"
 
+
 const NewPostForm = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState("");
@@ -44,67 +45,69 @@ const NewPostForm = () => {
   }, [userData]);
 
   return (
-    <div className="post-container">
-      {isLoading ? (
-        <i className="fas fa-spinner fa-pulse"></i>
-      ) : (
-        <Fragment>
-          <div className="data"></div>
-          <NavLink exact to="/profil">
-            <div className="user-info"></div>
-          </NavLink>
-          <div className="post-form">
-            <textarea
-              name="message"
-              id="message"
-              placeholder="Quoi de neuf ?"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-            />
-            {message || postPicture ? (
-              <li className="card-container">
-                <div className="card-left"></div>
-                <div className="card-right">
-                  <div className="card-header">
-                    <div className="pseudo">
-                      
+    <Fragment>
+      
+      <div className="post-container">
+        {isLoading ? (
+          <i className="fas fa-spinner fa-pulse"></i>
+        ) : (
+          <Fragment>
+            <div className="data"></div>
+            <NavLink exact to="/profil">
+              <div className="user-info"></div>
+            </NavLink>
+            <div className="post-form">
+              <textarea
+                name="message"
+                id="message"
+                placeholder="Quoi de neuf ?"
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+              />
+              {message || postPicture ? (
+                <li className="card-container">
+                  <div className="card-left"></div>
+                  <div className="card-right">
+                    <div className="card-header">
+                      <div className="pseudo">
+      
+                      </div>
+                      <span>{timestampParser(Date.now())}</span>
                     </div>
-                    <span>{timestampParser(Date.now())}</span>
+                    <div className="content">
+                      <p>{message}</p>
+                      <img src={postPicture} alt="" />
+                    </div>
                   </div>
-                  <div className="content">
-                    <p>{message}</p>
-                    <img src={postPicture} alt="" />
-                  </div>
+                </li>
+              ) : null}
+              <div className="footer-form">
+                <div className="icon">
+                  <img src="./img/icons/picture.svg" alt="img" />
+                  <input
+                    type="file"
+                    id="file-upload"
+                    name="file"
+                    accept=".jpg, .jpeg, .png"
+                    onChange={(e) => handlePicture(e)}
+                  />
                 </div>
-              </li>
-            ) : null}
-            <div className="footer-form">
-              <div className="icon">
-                <img src="./img/icons/picture.svg" alt="img" />
-                <input
-                  type="file"
-                  id="file-upload"
-                  name="file"
-                  accept=".jpg, .jpeg, .png"
-                  onChange={(e) => handlePicture(e)}
-                />
-              </div>
-              <div className="btn-send">
-                {message || postPicture ? (
-                  <button className="cancel" onClick={cancelPost}>
-                    Annuler
+                <div className="btn-send">
+                  {message || postPicture ? (
+                    <button className="cancel" onClick={cancelPost}>
+                      Annuler
+                    </button>
+                  ) : null}
+                  <button className="send" onClick={handlePost}>
+                    Envoyer
                   </button>
-                ) : null}
-
-                <button className="send" onClick={handlePost}>
-                  Envoyer
-                </button>
+                </div>
               </div>
             </div>
-          </div>
-        </Fragment>
-      )}
-    </div>
+          </Fragment>
+        )}
+      </div>
+    </Fragment>
   );
 };
 

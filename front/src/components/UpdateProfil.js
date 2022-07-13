@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import LeftNavbar from "../components/LeftNavbar.js";
 import { updateBio } from "../actions/user.actions.js";
 import { dateParser } from "./Utils.js";
 
@@ -15,7 +14,7 @@ const UpdateProfil = () => {
   };
   return (
     <div className="profil-container">
-      <LeftNavbar />
+      
       
       <div className="update-container">
         <div className="left-part">
