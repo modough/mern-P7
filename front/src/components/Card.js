@@ -5,7 +5,6 @@ import LikeButton from "./LikeButton";
 import { getPosts, updatePost } from "../actions/post.actions";
 import DeleteCard from "./DeleteCard.js";
 
-
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -25,8 +24,8 @@ const Card = ({ post }) => {
   };
 
   const handlePicture = (e) => {
-    setPostPicture(URL.createObjectURL(e.target.files[0])); 
-    setFile(e.target.files[0]); 
+    setPostPicture(URL.createObjectURL(e.target.files[0]));
+    setFile(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -39,14 +38,8 @@ const Card = ({ post }) => {
         <i className="fas fa-spinner fa-spin"></i>
       ) : (
         <Fragment>
-          <div className="card-left"></div>
           <div className="card-right">
             <div className="card-header">
-              <div className="pseudo">
-                <h3>
-                  {post.pseudo}
-                </h3>
-              </div>
               <span>{dateParser(post.createdAt)}</span>
             </div>
 
@@ -56,27 +49,29 @@ const Card = ({ post }) => {
                 <img src={post.picture} alt="card-pic" className="card-pic" />
               </div>
             )}
-          
+
             {isUpdated && (
               <div className="update-post">
                 <textarea
                   defaultValue={post.message}
                   onChange={(e) => setTextUpdate(e.target.value)}
                 />
-                <img src={postPicture || post.picture} alt="card-pic" className="card-pic" />
-                <div className="icon">
-                  <img src="./img/icons/picture.svg" alt="img" />
+                <img
+                  src={postPicture || post.picture}
+                  alt="card-pic"
+                  className="card-pic"
+                />
+
+                <div className="button-container">
+                  <button className="btn">Changer Image</button>
                   <input
                     type="file"
                     id="file-upload"
                     name="file"
                     accept=".jpg, .jpeg, .png"
                     onChange={(e) => handlePicture(e)}
-                    
                   />
-                </div>
-                <div className="button-container">
-                
+
                   <button className="btn" onClick={updateItem}>
                     Valider modification
                   </button>
@@ -94,7 +89,6 @@ const Card = ({ post }) => {
             )}
 
             <div className="card-footer">
-              <div className="comment"></div>
               <LikeButton post={post} />
               <img src="./img/icons/share.svg" alt="share" />
             </div>

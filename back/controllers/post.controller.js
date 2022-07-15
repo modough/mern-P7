@@ -2,7 +2,7 @@ const postModel = require("../models/post.model");
 const userModel = require("../models/user.model");
 const { uploadErrors } = require("../utils/error.utils");
 const objectID = require("mongoose").Types.ObjectId;
-const fs = require("fs");
+
 
 
 module.exports.readPost = (req, res) => {
@@ -17,7 +17,6 @@ module.exports.readPost = (req, res) => {
 
 module.exports.createPost = async (req, res) => {
   const newPost = new postModel({
-    userPseudo: userModel.pseudo,
     userId: req.body.userId,
     message: req.body.message,
     picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
@@ -27,7 +26,10 @@ module.exports.createPost = async (req, res) => {
   await newPost
     .save()
     .then(() => res.status(201).json({ message: "Enregistré !" }))
-    .catch(() => res.status(400).json({ uploadErrors }));
+    .catch((err) =>{
+      console.log(err);
+      res.status(400).json({ uploadErrors });
+    });
 };
 
 module.exports.updatePost = (req, res) => {

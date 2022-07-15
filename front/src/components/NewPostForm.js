@@ -24,6 +24,7 @@ const NewPostForm = () => {
       const data = new FormData();
       data.append('userId', userData._id);
       data.append('message', message);
+      data.append('picture', postPicture);
       if (file) data.append('file', file);
       //on envoie le post a la bd car c'est la bd qui cree l'id
       await dispatch(addPost(data));

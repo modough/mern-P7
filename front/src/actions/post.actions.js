@@ -20,7 +20,9 @@ export const getPosts = () => {
 
 export const addPost = (data) => {
   return () => {
+   
     return axios({
+     
       method: "post",
       url: `${process.env.REACT_APP_API_URL}api/post/`,
       data: data,
