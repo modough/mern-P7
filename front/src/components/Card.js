@@ -8,29 +8,32 @@ import DeleteCard from "./DeleteCard.js";
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
-  const [textUpdate, setTextUpdate] = useState(null);
-  const [postPicture, setPostPicture] = useState(null);
-  const [file, setFile] = useState();
-  const usersData = useSelector((state) => state.usersReducer);
+  const [textUpdate, setTextUpdate] = useState(post.message);
+  const [postPicture, setPostPicture] = useState(post.picture);
+
+  
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-  const updateItem = () => {
-    if (textUpdate || postPicture || file) {
-      dispatch(updatePost(post._id, textUpdate, postPicture));
+  const updateItem = async () => {
+    if (post._id || textUpdate || postPicture) {
+      await dispatch(updatePost(post._id, textUpdate, postPicture));
       dispatch(getPosts());
+     
     }
+
+   
     setIsUpdated(false);
   };
+  
 
   const handlePicture = (e) => {
     setPostPicture(URL.createObjectURL(e.target.files[0]));
-    setFile(e.target.files[0]);
   };
 
   useEffect(() => {
-    usersData !== [0] && setIsLoading(false);
-  }, [usersData]);
+    userData !== [0] && setIsLoading(false);
+  }, [userData]);
 
   return (
     <li className="card-container" key={post._id}>
@@ -71,7 +74,6 @@ const Card = ({ post }) => {
                     accept=".jpg, .jpeg, .png"
                     onChange={(e) => handlePicture(e)}
                   />
-
                   <button className="btn" onClick={updateItem}>
                     Valider modification
                   </button>
@@ -81,7 +83,7 @@ const Card = ({ post }) => {
 
             {(userData._id === post.userId || userData.isAdmin === true) && (
               <div className="button-container">
-                <div onClick={() => setIsUpdated(!isUpdated)}>
+                <div onClick={() => setIsUpdated(true)}>
                   <img src="./img/icons/edit.svg" alt="edit" />
                 </div>
                 <DeleteCard id={post._id} />

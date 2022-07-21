@@ -3,6 +3,10 @@ import { UidContext } from "../components/AppContext.js";
 import Log from "../components/log.js";
 import UpdateProfil from "../components/UpdateProfil.js";
 
+
+// on recupére le user id grâce à useContext, 
+// puis on voit si il est présent alors on affiche updateProfil
+// sinon affiche login
 const Profil = () => {
   const uid = useContext(UidContext);
   return (

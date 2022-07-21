@@ -93,13 +93,13 @@
         .btn {
           
           background: $color-1;
-          width: 240px;
+          width: 180px;
           transform: translateY(-3px);
 
           &:hover {
             color: $color-1;
             background: $color-2;
-            width: 250px;
+            width: 200px;
             letter-spacing: 1px;
           }
         }
@@ -190,10 +190,10 @@
       }
     }
     input[type="file"] {
-      width: 30px;
-      height: 30px;
+      width: 185px;
+      height: 40px;
       position: absolute;
-      transform: translate(-36px, 6px);
+      
       opacity: 0;
       cursor: pointer;
     }

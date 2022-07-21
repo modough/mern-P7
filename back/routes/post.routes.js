@@ -6,7 +6,7 @@ const isAdmin = require("../middlewares/admin");
 //posts
 router.get("/", postController.readPost);
 router.post("/", multer, postController.createPost);
-router.put("/:id", isAdmin, multer, postController.updatePost);
+router.put("/:id", multer, isAdmin, postController.updatePost);
 router.delete("/:id", isAdmin, postController.deletePost);
 
 router.patch("/like-post/:id", postController.likePost);

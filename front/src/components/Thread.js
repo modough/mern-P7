@@ -21,7 +21,7 @@ const Thread = () => {
       <ul>
         {posts !== [] && posts.map &&
           posts.map((post) => {
-            return <Card post= {post} key= {post._id} />;
+            return <Card post= {post} key={post._id} />;
           })
         }
       </ul>

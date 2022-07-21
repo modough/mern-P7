@@ -3,8 +3,6 @@ const userModel = require("../models/user.model");
 const { uploadErrors } = require("../utils/error.utils");
 const objectID = require("mongoose").Types.ObjectId;
 
-
-
 module.exports.readPost = (req, res) => {
   postModel
     .find((err, docs) => {
@@ -22,11 +20,12 @@ module.exports.createPost = async (req, res) => {
     picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likers: [],
   });
-
+  console.log(req.file.filename);
+  console.log(req.body.docs);
   await newPost
     .save()
     .then(() => res.status(201).json({ message: "Enregistré !" }))
-    .catch((err) =>{
+    .catch((err) => {
       console.log(err);
       res.status(400).json({ uploadErrors });
     });
@@ -36,20 +35,23 @@ module.exports.updatePost = (req, res) => {
   if (!objectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
-  const updatedRecord = {
-    message: req.body.message,
-    picture: req.body.picture
-  };
+  const thingObject = req.file
+    ? {
+        ...JSON.parse(newPost),
 
-  postModel.findByIdAndUpdate(
-    req.params.id,
-    { $set: updatedRecord },
-    { new: true },
-    (err, docs) => {
-      if (!err) res.send(docs);
-      else console.log("Update error : " + err);
-    }
-  );
+        picture: `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`,
+      }
+    : { ...req.body };
+
+  postModel
+    .findByIdAndUpdate(
+      { _id: req.params.id },
+      { ...thingObject, _id: req.params.id }
+    )
+    .then(() => res.status(200).json({ message: "Modifié !" }))
+    .catch((error) => res.status(400).json({ error }));
 };
 
 module.exports.deletePost = (req, res) => {

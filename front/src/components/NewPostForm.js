@@ -2,8 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { addPost, getPosts } from "../actions/post.actions";
-import {timestampParser} from "./Utils"
-
+import { timestampParser } from "./Utils";
 
 const NewPostForm = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,20 +19,20 @@ const NewPostForm = () => {
     setFile(e.target.files[0]);
   };
   const handlePost = async () => {
-    if (message || postPicture){
+    if (message || postPicture) {
       const data = new FormData();
-      data.append('userId', userData._id);
-      data.append('message', message);
-      data.append('picture', postPicture);
-      if (file) data.append('file', file);
+      data.append("userId", userData._id);
+      data.append("message", message);
+      data.append("picture", postPicture);
+      if (file) data.append("file", file);
       //on envoie le post a la bd car c'est la bd qui cree l'id
       await dispatch(addPost(data));
       // puis nous recuperons la liste des posts
       dispatch(getPosts());
 
-      cancelPost(); 
-    }else{
-      alert('Veuillez entrer un message');
+      cancelPost();
+    } else {
+      alert("Veuillez entrer un message");
     }
   };
   const cancelPost = () => {
@@ -47,7 +46,6 @@ const NewPostForm = () => {
 
   return (
     <Fragment>
-      
       <div className="post-container">
         {isLoading ? (
           <i className="fas fa-spinner fa-pulse"></i>
@@ -70,9 +68,7 @@ const NewPostForm = () => {
                   <div className="card-left"></div>
                   <div className="card-right">
                     <div className="card-header">
-                      <div className="pseudo">
-      
-                      </div>
+                      <div className="pseudo"></div>
                       <span>{timestampParser(Date.now())}</span>
                     </div>
                     <div className="content">
@@ -84,7 +80,7 @@ const NewPostForm = () => {
               ) : null}
               <div className="footer-form">
                 <div className="icon">
-                  <img src="./img/icons/picture.svg" alt="img" />
+                  <button >Choisir image</button>
                   <input
                     type="file"
                     id="file-upload"
