@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -24,9 +26,11 @@ const NewPostForm = () => {
     if (message || postPicture) {
       const data = new FormData();
       data.append("userId", userData._id);
+      
       data.append("message", message);
       data.append("picture", postPicture);
       if (file) data.append("file", file);
+      
       //on envoie le post a la bd car c'est la bd qui cree l'id
       await dispatch(addPost(data));
       // puis nous recuperons la liste des posts
@@ -111,3 +115,7 @@ const NewPostForm = () => {
 };
 
 export default NewPostForm;
+
+
+
+

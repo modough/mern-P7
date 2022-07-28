@@ -19,6 +19,8 @@ export const getPosts = () => {
 };
 
 export const addPost = (data) => {
+  console.log(data);
+  console.log("********************************");
   return () => {
     return axios({
       method: "post",

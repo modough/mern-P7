@@ -6,7 +6,7 @@ const postRoutes = require('./routes/post.routes.js');
 require('dotenv').config({path: './config/.env'});
 require('./config/db');
 const {checkUser, requireAuth} = require('./middlewares/auth.middleware');
-const fileupload = require("express-fileupload");
+
 const cors = require('cors')
 
 const app = express();
@@ -14,12 +14,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use(fileupload());
+
 
 
 //CORS
 const corsOptions = {
-  origin: process.env.CLIENT_URL || '*',
+  origin: process.env.CLIENT_URL,
   credentials: true,
   'allowedHeaders': ['sessionId', 'content-type'],
   'exposedHeaders': ['sessionId'],

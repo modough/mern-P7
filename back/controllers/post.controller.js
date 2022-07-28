@@ -1,4 +1,3 @@
-
 const postModel = require("../models/post.model");
 const userModel = require("../models/user.model");
 const { uploadErrors } = require("../utils/error.utils");
@@ -18,10 +17,12 @@ module.exports.createPost = async (req, res) => {
   const newPost = new postModel({
     userId: req.body.userId,
     message: req.body.message,
-    picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+    picture: `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`,
     likers: [],
   });
-
+  
   await newPost
     .save()
     .then(() => res.status(201).json({ message: "Enregistré !" }))
@@ -35,15 +36,16 @@ module.exports.updatePost = async (req, res) => {
   if (!objectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
   const updatedRecord = req.file
- 
-    ? { 
+    ? {
         message: req.body.message,
         picture: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
-    : {...req.body};
-   await postModel
+    : { ...req.body };
+    console.log(req);
+  console.log(".......................................");
+  await postModel
     .updateOne({ _id: req.params.id }, { ...updatedRecord, _id: req.params.id })
     .then(() => res.status(200).json({ message: "Modifié !" }))
     .catch((error) => res.status(400).json({ error }));
@@ -52,13 +54,10 @@ module.exports.updatePost = async (req, res) => {
 module.exports.deletePost = (req, res) => {
   if (!objectID.isValid(req.params.id))
     return res.status(400).send("ID unknown :" + req.params.id);
-  postModel.findByIdAndRemove(
-    req.params.id,
-    (err, docs) => {
-      if (!err) res.send(docs);
-      else console.log("Delete error :" + err);
-    }
-  );
+  postModel.findByIdAndRemove(req.params.id, (err, docs) => {
+    if (!err) res.send(docs);
+    else console.log("Delete error :" + err);
+  });
 };
 
 module.exports.likePost = async (req, res) => {

@@ -17,8 +17,8 @@ const Card = ({ post }) => {
 
   const onPostChange = async () => {
     
-    if (post._id || textUpdate || postPicture ) {
-      new FormData().append("file", file)
+    if (post._id || textUpdate || postPicture|| file) {
+      
       await dispatch(updatePost(post._id, textUpdate, postPicture, file));
       dispatch(getPosts());
     } 
@@ -26,7 +26,7 @@ const Card = ({ post }) => {
   };
 
   const updateImage = (e) => {
-    setPostPicture(window.URL.createObjectURL(e.target.files[0]));
+    setPostPicture(URL.createObjectURL(e.target.files[0]));
     
     setFile(e.target.files[0]);
   };
