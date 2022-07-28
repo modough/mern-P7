@@ -15,8 +15,10 @@ const NewPostForm = () => {
   const handlePicture = (e) => {
     //on affiche l'image en front
     setPostPicture(URL.createObjectURL(e.target.files[0]));
+    
     // puis l'enregistrer dans la bd
     setFile(e.target.files[0]);
+    
   };
   const handlePost = async () => {
     if (message || postPicture) {
@@ -96,7 +98,7 @@ const NewPostForm = () => {
                     </button>
                   ) : null}
                   <button className="send" onClick={handlePost}>
-                    Envoyer
+                    Publier !
                   </button>
                 </div>
               </div>

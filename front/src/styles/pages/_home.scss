@@ -25,7 +25,7 @@
       text-align: center;
       
       .connection-form {
-        background: $color-4;
+        background: $color-2;
         border-radius: 20px;
         padding: 20px;
 
@@ -40,17 +40,25 @@
             padding: 12px 14px;
             transition: .2s;
             margin: 0 8px;
+            &:hover {
+              color: $color-1;
+              font-weight: bold;
+            }
           }
           .active-btn {
-            background: $color-1;
-  
+            background: $black;
+            color: white;
+            font-weight: bold;
             &:hover {
-              background: $color-2;
+              color: $color-1;
+              font-weight: bold;
+              background:none;
             }
+            
           }
           li:not(.active-btn) {
             &:hover {
-              transform: translateX(3px)
+              transform: translateX(1px)
             }
           }
         }

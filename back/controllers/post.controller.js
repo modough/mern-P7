@@ -1,3 +1,4 @@
+
 const postModel = require("../models/post.model");
 const userModel = require("../models/user.model");
 const { uploadErrors } = require("../utils/error.utils");
@@ -20,8 +21,7 @@ module.exports.createPost = async (req, res) => {
     picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likers: [],
   });
-  console.log(req.file.filename);
-  console.log(req.body.docs);
+
   await newPost
     .save()
     .then(() => res.status(201).json({ message: "Enregistré !" }))
@@ -31,25 +31,20 @@ module.exports.createPost = async (req, res) => {
     });
 };
 
-module.exports.updatePost = (req, res) => {
+module.exports.updatePost = async (req, res) => {
   if (!objectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-
-  const thingObject = req.file
-    ? {
-        ...JSON.parse(newPost),
-
+  const updatedRecord = req.file
+ 
+    ? { 
+        message: req.body.message,
         picture: `${req.protocol}://${req.get("host")}/images/${
           req.file.filename
         }`,
       }
-    : { ...req.body };
-
-  postModel
-    .findByIdAndUpdate(
-      { _id: req.params.id },
-      { ...thingObject, _id: req.params.id }
-    )
+    : {...req.body};
+   await postModel
+    .updateOne({ _id: req.params.id }, { ...updatedRecord, _id: req.params.id })
     .then(() => res.status(200).json({ message: "Modifié !" }))
     .catch((error) => res.status(400).json({ error }));
 };
@@ -59,7 +54,6 @@ module.exports.deletePost = (req, res) => {
     return res.status(400).send("ID unknown :" + req.params.id);
   postModel.findByIdAndRemove(
     req.params.id,
-
     (err, docs) => {
       if (!err) res.send(docs);
       else console.log("Delete error :" + err);

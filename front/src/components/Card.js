@@ -11,24 +11,24 @@ const Card = ({ post }) => {
   const [textUpdate, setTextUpdate] = useState(post.message);
   const [postPicture, setPostPicture] = useState(post.picture);
 
-  
+  const [file, setFile] = useState("file");
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-  const updateItem = async () => {
-    if (post._id || textUpdate || postPicture) {
-      await dispatch(updatePost(post._id, textUpdate, postPicture));
+  const onPostChange = async () => {
+    
+    if (post._id || textUpdate || postPicture ) {
+      new FormData().append("file", file)
+      await dispatch(updatePost(post._id, textUpdate, postPicture, file));
       dispatch(getPosts());
-     
-    }
-
-   
+    } 
     setIsUpdated(false);
   };
-  
 
-  const handlePicture = (e) => {
-    setPostPicture(URL.createObjectURL(e.target.files[0]));
+  const updateImage = (e) => {
+    setPostPicture(window.URL.createObjectURL(e.target.files[0]));
+    
+    setFile(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -72,10 +72,10 @@ const Card = ({ post }) => {
                     id="file-upload"
                     name="file"
                     accept=".jpg, .jpeg, .png"
-                    onChange={(e) => handlePicture(e)}
+                    onChange={(e) => updateImage(e)}
                   />
-                  <button className="btn" onClick={updateItem}>
-                    Valider modification
+                  <button className="btn" onClick={onPostChange}>
+                    Valider !
                   </button>
                 </div>
               </div>
@@ -92,7 +92,6 @@ const Card = ({ post }) => {
 
             <div className="card-footer">
               <LikeButton post={post} />
-              <img src="./img/icons/share.svg" alt="share" />
             </div>
           </div>
         </Fragment>

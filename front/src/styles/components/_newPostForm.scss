@@ -3,7 +3,9 @@
   padding: 16px 40px;
   border-radius: 20px;
   position: relative;
-  border: 2px solid #FFD7D7;
+  border: 1px solid lightgrey;
+  background: $color-2;
+  min-height: 200px;
   
 
   i {
@@ -47,11 +49,12 @@
     margin: 0 auto 0;
 
     textarea {
-      height: 62px;
+      height: 60px;
       width: 100%;
       font-size: 1.4rem;
       padding: 12px 15px;
-      border-radius: 20px 20px 6px 20px;
+      border-radius: 10px;
+      border: 2px solid lightgrey;
     }
     .card-container {
       background: $white;
@@ -116,7 +119,7 @@
     .footer-form {
       display: flex;
       justify-content: space-between;
-      margin: 0 auto;
+      margin: 20px auto;
       width: 100%;
 
       .icon {
@@ -130,13 +133,7 @@
           width: 180px;
           transform: translateY(-3px);
 
-          &:hover {
-           
-            width: 150px;
-            letter-spacing: 1px;
-            color: $color-4;
-            background: $color-3;
-          }
+          
         }
 
         img {
@@ -148,24 +145,23 @@
 
         button {
           background: $color-1;
-          width: 150px;
+          width: 156px;
           padding: 10px 20px;
           transition: 0.2s;
           &:hover {
-            background: $color-2;
+            background: $black;
             letter-spacing: 1px;
-            width: 155px;
+            width: 165px;
           }
         }
 
         input {
-          width: 150px;
+          width: 155px;
           height: 45px;
           position: absolute;
-          transform: translate(-150px, 0px);
+          transform: translate(-75px, -45px);
           opacity: 0;
           cursor: pointer;
-
           &::-webkit-file-upload-button {
             cursor: pointer;
           }

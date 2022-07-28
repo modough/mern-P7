@@ -17,6 +17,7 @@ const Log = (props) => {
 
   return (
     <div className="connection-form">
+    <img src="../img/icon-left-font-monochrome-black.png" alt="Login" style={{width:"60%", opacity:"0.8", marginBottom:"30px"}} />
       <div className="form-container">
         <ul>
           <li

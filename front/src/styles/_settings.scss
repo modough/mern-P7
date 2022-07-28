@@ -46,7 +46,7 @@ textarea {
   border-radius: 20px;
   width: 270px;
   font-family: $font-1;
-  background: $color-2;
+  background: white;
 }
 textarea {
   &:focus {
@@ -55,6 +55,7 @@ textarea {
 }
 button {
   background: $color-1;
+  border: 1px solid lightgrey;
   color: white;
   font-weight: bolder;
   font-family: $font-3;
@@ -65,11 +66,12 @@ button {
   cursor: pointer;
   font-size: 1.1rem;
   border-radius: 20px;
-  box-shadow: 3px 3px black;
+  
 
   &:hover {
-    background: $color-2;
-    color: $color-1;
+    background: $black;
+    
+    letter-spacing: 2px;
   }
 }
 input[type="button"],
