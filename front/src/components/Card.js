@@ -11,7 +11,7 @@ const Card = ({ post }) => {
   const [textUpdate, setTextUpdate] = useState(post.message);
   const [postPicture, setPostPicture] = useState(post.picture);
 
-  const [file, setFile] = useState("file");
+  const [file, setFile] = useState();
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
@@ -20,6 +20,8 @@ const Card = ({ post }) => {
     if (post._id || textUpdate || postPicture|| file) {
       
       await dispatch(updatePost(post._id, textUpdate, postPicture, file));
+      console.log(file);
+      console.log("++++++++++++++++++++++++++++");
       dispatch(getPosts());
     } 
     setIsUpdated(false);
@@ -27,7 +29,6 @@ const Card = ({ post }) => {
 
   const updateImage = (e) => {
     setPostPicture(URL.createObjectURL(e.target.files[0]));
-    
     setFile(e.target.files[0]);
   };
 

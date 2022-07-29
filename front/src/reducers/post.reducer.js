@@ -43,6 +43,7 @@ export default function postReducer(state = initialState, action) {
             ...post,
             message: action.payload.message,
             picture: action.payload.picture,
+            file: action.payload.file
             
             
           };

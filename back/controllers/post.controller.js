@@ -17,12 +17,10 @@ module.exports.createPost = async (req, res) => {
   const newPost = new postModel({
     userId: req.body.userId,
     message: req.body.message,
-    picture: `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`,
+    picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likers: [],
   });
-  
+
   await newPost
     .save()
     .then(() => res.status(201).json({ message: "Enregistré !" }))
@@ -43,7 +41,7 @@ module.exports.updatePost = async (req, res) => {
         }`,
       }
     : { ...req.body };
-    console.log(req);
+  console.log(req.file);
   console.log(".......................................");
   await postModel
     .updateOne({ _id: req.params.id }, { ...updatedRecord, _id: req.params.id })

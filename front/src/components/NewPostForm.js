@@ -26,7 +26,6 @@ const NewPostForm = () => {
     if (message || postPicture) {
       const data = new FormData();
       data.append("userId", userData._id);
-      
       data.append("message", message);
       data.append("picture", postPicture);
       if (file) data.append("file", file);
