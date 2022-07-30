@@ -38,12 +38,14 @@ export default function postReducer(state = initialState, action) {
 
     case UPDATE_POST:
       return state.map((post) => {
-        if (post._id === action.payload.postId) {
+        if (post._id === action.payload.data.postId) {
+          console.log(action.payload.data.postId);
+          console.log("----------------------------")
           return {
             ...post,
-            message: action.payload.message,
-            picture: action.payload.picture,
-            file: action.payload.file
+            message: action.payload.data.message,
+            picture: action.payload.data.picture,
+            
             
             
           };

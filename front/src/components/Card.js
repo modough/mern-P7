@@ -11,17 +11,20 @@ const Card = ({ post }) => {
   const [textUpdate, setTextUpdate] = useState(post.message);
   const [postPicture, setPostPicture] = useState(post.picture);
 
-  const [file, setFile] = useState();
+  const [file, setFile] = useState("file");
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const onPostChange = async () => {
     
-    if (post._id || textUpdate || postPicture|| file) {
+    if (post._id || textUpdate || postPicture) {
+      const data = new FormData();
+      data.append("postId", post._id);
+      data.append("message", textUpdate);
+      data.append("picture", postPicture);
+      if (file) data.append("file", file);
       
-      await dispatch(updatePost(post._id, textUpdate, postPicture, file));
-      console.log(file);
-      console.log("++++++++++++++++++++++++++++");
+      await dispatch(updatePost(data));
       dispatch(getPosts());
     } 
     setIsUpdated(false);
@@ -29,6 +32,7 @@ const Card = ({ post }) => {
 
   const updateImage = (e) => {
     setPostPicture(URL.createObjectURL(e.target.files[0]));
+    
     setFile(e.target.files[0]);
   };
 
