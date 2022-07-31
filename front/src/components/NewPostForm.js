@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -9,7 +7,7 @@ import { timestampParser } from "./Utils";
 const NewPostForm = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState("");
-  const [postPicture, setPostPicture] = useState(null);
+  const [postPicture, setPostPicture] = useState("");
   const [file, setFile] = useState();
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
@@ -17,10 +15,9 @@ const NewPostForm = () => {
   const handlePicture = (e) => {
     //on affiche l'image en front
     setPostPicture(URL.createObjectURL(e.target.files[0]));
-    
+
     // puis l'enregistrer dans la bd
     setFile(e.target.files[0]);
-    
   };
   const handlePost = async () => {
     if (message || postPicture) {
@@ -29,7 +26,7 @@ const NewPostForm = () => {
       data.append("message", message);
       data.append("picture", postPicture);
       if (file) data.append("file", file);
-      
+
       //on envoie le post a la bd car c'est la bd qui cree l'id
       await dispatch(addPost(data));
       // puis nous recuperons la liste des posts
@@ -85,7 +82,7 @@ const NewPostForm = () => {
               ) : null}
               <div className="footer-form">
                 <div className="icon">
-                  <button >Choisir image</button>
+                  <button>Choisir image</button>
                   <input
                     type="file"
                     id="file-upload"
@@ -114,7 +111,3 @@ const NewPostForm = () => {
 };
 
 export default NewPostForm;
-
-
-
-

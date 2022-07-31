@@ -14,8 +14,6 @@ module.exports.readPost = (req, res) => {
 };
 
 module.exports.createPost = async (req, res) => {
-  console.log(req.file);
-  console.log(".......................................");
   const newPost = new postModel({
     userId: req.body.userId,
     message: req.body.message,
@@ -33,37 +31,26 @@ module.exports.createPost = async (req, res) => {
 };
 
 module.exports.updatePost = async (req, res) => {
-  console.log(req.file);
-  console.log(".......................................");
   if (!objectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-  const updatedRecord = new postModel({
-    message: req.body.message,
-    picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-  });
-  // Convert the Model instance to a simple object using Model's 'toObject' function
-  // to prevent weirdness like infinite looping...
-  var upsertData = updatedRecord.toObject();
+    
+    const updatedPicture = new postModel({
+      message: req.body.message,
+      picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+    });
+    const upsertData = updatedPicture.toObject();
+    delete upsertData._id;
 
-  // Delete the _id property, otherwise Mongo will return a "Mod on _id not allowed" error
-  delete upsertData._id;
-
-  // Do the upsert, which works like this: If no Contact document exists with
-  // _id = req.params.id, then create a new doc using upsertData.
-  // Otherwise, update the existing doc with upsertData
-  postModel.updateOne(
-    { _id: req.params.id },
-    upsertData,
-    { upsert: true },
-    function (err, doc) {
-      if (err) {
-        console.log(err);
-        res.status(400).json({ err });
-      } else {
-        res.status(200).json({ message: "Modifié !" });
+    await postModel.findByIdAndUpdate(
+      {_id: req.params.id},
+      
+      {$set: upsertData},
+      { new: true },
+      (err, docs) => {
+        if (!err) res.send(docs);
+        else console.log("Update error : " + err);
       }
-    }
-  );
+    );
 };
 
 module.exports.deletePost = (req, res) => {

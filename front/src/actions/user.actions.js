@@ -15,19 +15,15 @@ export const getUser = (uid) => {
 };
 
 export const updateBio = (userId, bio) => {
-    return (dispatch) => {
-        return axios ({
-            method: 'PUT',
-            url: `${process.env.REACT_APP_API_URL}api/user/` + userId,
-            data: {bio}
-
-        })
-        
-        .then((res) => {
-            dispatch({ type: UPDATE_BIO, payload: bio})
-        })
-        .catch((err) => console.log(err));
-
-    }
-}
-
+  return (dispatch) => {
+    return axios({
+      method: "PUT",
+      url: `${process.env.REACT_APP_API_URL}api/user/` + userId,
+      data: { bio },
+    })
+      .then((res) => {
+        dispatch({ type: UPDATE_BIO, payload: bio });
+      })
+      .catch((err) => console.log(err));
+  };
+};

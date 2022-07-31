@@ -19,8 +19,6 @@ export const getPosts = () => {
 };
 
 export const addPost = (data) => {
-  console.log(data);
-  console.log("********************************");
   return () => {
     return axios({
       method: "post",
@@ -58,17 +56,15 @@ export const unlikePost = (postId, userId) => {
 
 export const updatePost = (data) => {
   return (dispatch) => {
-    console.log(data.get("postId"));
-    console.log("********************************");
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_URL}api/post/${data.get("postId")}`, 
-      data: data ,
+      url: `${process.env.REACT_APP_API_URL}api/post/${data.get("postId")}`,
+      data: data,
     })
       .then((res) => {
         dispatch({
           type: UPDATE_POST,
-          payload: { data },
+          payload: data,
         });
       })
       .catch((err) => console.log(err));

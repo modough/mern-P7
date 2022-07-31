@@ -2,10 +2,13 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../models/user.model');
 
 module.exports.checkUser = (req, res, next) => {
+    // on peut lire le token grace au cookie qui est visible grace a cookieParser dans serverjs
     const token = req.cookies.jwt;
     if (token){
+        //  jwt verifie si il y'a un token le decode grace au token secret pour voir s'il y'a un id
         jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
             if(err){
+                // on supprime le cookie '' et maxAge 1 milliseconde
                 res.locals.user = null;
                 res.cookie('jwt', '', {maxAge: 1});
                 next();

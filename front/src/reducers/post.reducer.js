@@ -3,14 +3,13 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   UPDATE_POST,
-  DELETE_POST
+  DELETE_POST,
 } from "../actions/post.actions";
 
 const initialState = {};
 
 export default function postReducer(state = initialState, action) {
   switch (action.type) {
-    
     case GET_POSTS:
       return action.payload;
 
@@ -38,25 +37,18 @@ export default function postReducer(state = initialState, action) {
 
     case UPDATE_POST:
       return state.map((post) => {
-        if (post._id === action.payload.data.postId) {
-          console.log(action.payload.data.postId);
-          console.log("----------------------------")
+        if (post._id === action.payload.postId) {
           return {
             ...post,
-            message: action.payload.data.message,
-            picture: action.payload.data.picture,
-            
-            
-            
+            message: action.payload.message,
+            picture: action.payload.picture,
           };
-        }
-        else return post;
+        } else return post;
       });
 
     case DELETE_POST:
-      return state.filter((post) => post._id !== action.payload.postId );
-      
-        
+      return state.filter((post) => post._id !== action.payload.postId);
+
     default:
       return state;
   }

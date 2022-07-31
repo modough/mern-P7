@@ -29,7 +29,7 @@ const corsOptions = {
 app.use(cors(corsOptions) );
 
 
-//jwt for secure connection
+//jwt for secure connection auth.middleware
 app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res, next) => {
     res.status(200).send(res.locals.user._id)
