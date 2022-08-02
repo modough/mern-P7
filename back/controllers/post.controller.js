@@ -30,27 +30,33 @@ module.exports.createPost = async (req, res) => {
     });
 };
 
-module.exports.updatePost = async (req, res) => {
+module.exports.updatePost = (req, res) => {
   if (!objectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
-    
-    const updatedPicture = new postModel({
-      message: req.body.message,
-      picture: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-    });
-    const upsertData = updatedPicture.toObject();
-    delete upsertData._id;
 
-    await postModel.findByIdAndUpdate(
-      {_id: req.params.id},
-      
-      {$set: upsertData},
-      { new: true },
-      (err, docs) => {
-        if (!err) res.send(docs);
-        else console.log("Update error : " + err);
-      }
-    );
+  const updatedRecord = new postModel(
+    req.file
+      ? {
+          message: req.body.message,
+          picture: `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`,
+        }
+      : { ...req.body }
+  );
+  delete req.body.picture;
+  const upsertData = updatedRecord.toObject();
+  delete upsertData._id;
+
+  postModel.updateOne(
+    { _id: req.params.id },
+    upsertData,
+    { upsert: true },
+    (err, docs) => {
+      if (!err) res.send(docs);
+      else console.log("Update error : " + err);
+    }
+  );
 };
 
 module.exports.deletePost = (req, res) => {
